@@ -9,7 +9,8 @@ class MessagesController < ApplicationController
     if message.save
       ActionCable.server.broadcast 'messages',
         message: message.content,
-        user: message.user.alias
+        user: message.user.alias,
+        created_at: message.created_at
     end
   end
 

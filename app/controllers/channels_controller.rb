@@ -39,6 +39,7 @@ class ChannelsController < ApplicationController
   end
 
   def chat
+    @messages = @channel.messages.order(created_at: :desc).limit(10).includes(:user)
   end
 
   private
