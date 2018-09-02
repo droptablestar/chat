@@ -1,5 +1,5 @@
 class ChannelsController < ApplicationController
-  before_action :set_channel, only: [:show, :edit, :update, :destroy]
+  before_action :set_channel, only: [:show, :edit, :update, :destroy, :chat]
 
   # GET /channels
   # GET /channels.json
@@ -24,7 +24,7 @@ class ChannelsController < ApplicationController
   # POST /channels
   # POST /channels.json
   def create
-    admin = User.find_by(id: 1)
+    admin = User.find_by(current_user)
     @channel = Channel.new(channel_params.merge(admin: admin))
     respond_to do |format|
       if @channel.save

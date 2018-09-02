@@ -1,1 +1,17 @@
-<h1>Chat</h1>
+<style>
+  #chatbox {
+    height:120px;
+    width:100%;
+    border:1px solid #ccc;
+    font:16px/26px Georgia, Garamond, Serif;
+    overflow: auto;
+  }
+</style>
+<div class="row col-md-8 col-md-offset-2">
+  <h1><%= @channel.name %></h1>
+
+  <div class="panel panel-default">
+    <div id="chatbox"></div>
+    <%= render partial: 'messages/message_form', locals: {channel: @channel}%>
+  </div>
+</div>
