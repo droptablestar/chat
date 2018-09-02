@@ -19,7 +19,7 @@
 
 <div class="row col-md-8 col-md-offset-2">
   <h1><%= @channel.name %></h1>
-    <div id="chatbox" onload="scrollToBottom()" style: "overflow: auto;">
+    <div id="chatbox">
       <%= render partial: @channel.messages, locals: {messages: @channel.messages.order(:created_at).limit(10).includes(:user) } %>
     </div>
     <%= render partial: 'messages/message_form', locals: {channel: @channel} %>
