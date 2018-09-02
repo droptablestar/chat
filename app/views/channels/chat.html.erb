@@ -7,15 +7,10 @@
     overflow: auto;
   }
 </style>
-<script>
-  function scrollToBottom() {
-    console.log('fuck you');
-    this.scrollTop = this.scrollHeight;
-  }
-</script>
+
 <div class="row col-md-8 col-md-offset-2">
   <h1><%= @channel.name %></h1>
-    <div id="chatbox" onload="scrollToBottom();">
+    <div id="chatbox" onload="scrollToBottom()" style: "overflow: auto;">
       <% @channel.messages.each do |msg| %>
         <p>
           <strong><%= msg.user.alias %>: </strong>
@@ -25,3 +20,11 @@
     </div>
     <%= render partial: 'messages/message_form', locals: {channel: @channel}%>
 </div>
+<script>
+    $(document).ready(() => {
+      $('#chatbox').ready(() => {
+        chatbox = $('#chatbox')
+        chatbox.scrollTop(chatbox.prop('scrollHeight'));
+      });
+    });
+</script>
