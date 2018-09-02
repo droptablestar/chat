@@ -7,20 +7,16 @@
     overflow: auto;
   }
 </style>
-<script>
-  // <!-- Scroll chatbox to bottom when page loads -->
-  // $(document).ready(() => {
-  //   $('#chatbox').ready(() => {
-  //     chatbox = $('#chatbox')
-  //     chatbox.scrollTop(chatbox.prop('scrollHeight'));
-  //   });
-  // });
-</script>
 
 <div class="row col-md-8 col-md-offset-2">
   <h1><%= @channel.name %></h1>
     <div id="chatbox">
-      <%= render partial: @channel.messages, locals: {messages: @channel.messages.order(:created_at).limit(10).includes(:user) } %>
+      <% @messages.each do |msg| %>
+        <p>
+          <%= msg.created_at.strftime('%H:%M:%S') %><strong> <%= msg.user.alias %></strong>:
+          <%= msg.content %>
+        </p>
+      <% end %>
     </div>
     <%= render partial: 'messages/message_form', locals: {channel: @channel} %>
 </div>
