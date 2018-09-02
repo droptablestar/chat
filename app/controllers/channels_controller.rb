@@ -4,21 +4,12 @@ class ChannelsController < ApplicationController
   # GET /channels
   # GET /channels.json
   def index
-    @channels = Channel.all
-  end
-
-  # GET /channels/1
-  # GET /channels/1.json
-  def show
+    @channels = Channel.includes(:admin)
   end
 
   # GET /channels/new
   def new
     @channel = Channel.new
-  end
-
-  # GET /channels/1/edit
-  def edit
   end
 
   # POST /channels
