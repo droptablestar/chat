@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :authorized_user, only: [:update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -71,4 +72,10 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:alias, :password, :password_confirmation)
     end
+
+  def authorized_user
+    unless params[:id] && current_user && current_user.id.to_s == params[:id].to_s
+      redirect_back(fallback_location: root_path)
+    end
+  end
 end

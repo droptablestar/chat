@@ -1,5 +1,6 @@
 class ChannelsController < ApplicationController
   before_action :set_channel, only: [:show, :edit, :update, :destroy, :chat]
+  before_action :authorized_user, only: [:destroy]
 
   # GET /channels
   # GET /channels.json
@@ -51,5 +52,11 @@ class ChannelsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def channel_params
       params.require(:channel).permit(:name)
+    end
+
+    def authorized_user
+      unless current_user && @channel.admin.id == current_user.id
+        redirect_back(fallback_location: root_path)
+      end
     end
 end
