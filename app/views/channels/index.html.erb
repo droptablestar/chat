@@ -20,6 +20,7 @@
           <% else %>
             <%= link_to 'Join', membership_path(channel.id), method: :put %>
           <% end  %>
+          <%= link_to 'View', chat_path(channel.id) %>
         </td>
         <% if channel.admin == current_user %>
           <td><%= link_to 'Show', channel %></td>

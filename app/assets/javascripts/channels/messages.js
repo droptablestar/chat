@@ -1,9 +1,9 @@
 App.messages = App.cable.subscriptions.create('MessagesChannel', {
-  reveived: (data) => {
-    let msg = '<p><strong>' +
-                  data.user + ': </strong>' +
+  received: (data) => {
+    let msg = '<p><strong>' + data.user + ': </strong>' +
                   data.message +
-                '</p>'
-    return $('#chatbox').append(this.render)
+                '</p>';
+    $('#message_form').trigger('reset');
+    return $('#chatbox').prepend(msg);
   }
 })
