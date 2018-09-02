@@ -24,8 +24,8 @@ class ChannelsController < ApplicationController
   # POST /channels
   # POST /channels.json
   def create
-    @channel = Channel.new(channel_params)
-
+    admin = User.find_by(id: 1)
+    @channel = Channel.new(channel_params.merge(admin: admin))
     respond_to do |format|
       if @channel.save
         format.html { redirect_to @channel, notice: 'Channel was successfully created.' }
