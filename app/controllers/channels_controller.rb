@@ -15,28 +15,14 @@ class ChannelsController < ApplicationController
   # POST /channels
   # POST /channels.json
   def create
-    admin = User.find_by(current_user)
+    admin = User.find_by(id: current_user)
     @channel = Channel.new(channel_params.merge(admin: admin))
     respond_to do |format|
       if @channel.save
-        format.html { redirect_to @channel, notice: 'Channel was successfully created.' }
+        format.html { redirect_to chat_url(@channel.id), notice: 'Channel was successfully created.' }
         format.json { render :show, status: :created, location: @channel }
       else
         format.html { render :new }
-        format.json { render json: @channel.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /channels/1
-  # PATCH/PUT /channels/1.json
-  def update
-    respond_to do |format|
-      if @channel.update(channel_params)
-        format.html { redirect_to @channel, notice: 'Channel was successfully updated.' }
-        format.json { render :show, status: :ok, location: @channel }
-      else
-        format.html { render :edit }
         format.json { render json: @channel.errors, status: :unprocessable_entity }
       end
     end

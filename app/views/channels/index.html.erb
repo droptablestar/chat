@@ -15,16 +15,9 @@
       <tr>
         <td><%= channel.name %></td>
         <td>
-          <% if current_user.channels.include?(channel) %>
-            <%= link_to 'Leave', membership_path(channel.id), method: :delete %>
-          <% else %>
-            <%= link_to 'Join', membership_path(channel.id), method: :put %>
-          <% end  %>
           <%= link_to 'View', chat_path(channel.id) %>
         </td>
         <% if channel.admin == current_user %>
-          <td><%= link_to 'Show', channel %></td>
-          <td><%= link_to 'Edit', edit_channel_path(channel) %></td>
           <td><%= link_to 'Destroy', channel, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
