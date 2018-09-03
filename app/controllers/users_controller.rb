@@ -65,7 +65,7 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -73,9 +73,9 @@ class UsersController < ApplicationController
       params.require(:user).permit(:alias, :password, :password_confirmation)
     end
 
-  def authorized_user
-    unless params[:id] && current_user && current_user.id.to_s == params[:id].to_s
-      redirect_back(fallback_location: root_path)
+    def authorized_user
+      unless params[:id] && current_user && current_user.id.to_s == params[:id].to_s
+        redirect_back(fallback_location: root_path)
+      end
     end
-  end
 end

@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :rememberable, :validatable
 
-  has_many :messages
+  has_many :messages, dependent: :destroy
 
   has_many :owned_channels, class_name: 'Channel', dependent: :destroy
 
