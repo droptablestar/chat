@@ -6,7 +6,7 @@ services:
   - postgresql
 before_script:
   - cp config/database.travis.yml config/database.yml
-  - psql -c 'create database Chat_test;' -U postgres
+  - RAILS_ENV=test bundle exec rake db:create
 script:
   - bin/rake db:migrate RAILS_ENV=test
   - bin/rake
